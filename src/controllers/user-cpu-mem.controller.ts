@@ -7,7 +7,7 @@ import { inject } from "@loopback/core";
 export class UserCpuMemController {
     constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
     @post("/user-cpu-mem")
-    async create(@requestBody() data: Object) {
+    async create(@requestBody.array({}) data: Object[]) {
         console.log(data);
         return data;
     }
