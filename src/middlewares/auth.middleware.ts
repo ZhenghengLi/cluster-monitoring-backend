@@ -1,6 +1,6 @@
 import { Middleware, HttpErrors } from "@loopback/rest";
 
-const passWord = "xxxx";
+const passWord = process.env.PASSWORD ?? "xxxx";
 
 export const staticAuth: Middleware = async (ctx, next) => {
     const auth = ctx.request.header("authorization");
