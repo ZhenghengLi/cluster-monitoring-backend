@@ -6,6 +6,7 @@ import { RestExplorerBindings, RestExplorerComponent } from "@loopback/rest-expl
 import { ServiceMixin } from "@loopback/service-proxy";
 import path from "path";
 import { MySequence } from "./sequence";
+import { staticAuth } from "./middlewares/auth.middleware";
 
 export { ApplicationConfig };
 
@@ -24,6 +25,8 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
             path: "/explorer",
         });
         this.component(RestExplorerComponent);
+
+        this.middleware(staticAuth);
 
         this.projectRoot = __dirname;
         // Customize @loopback/boot Booter Conventions here
