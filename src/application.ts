@@ -7,6 +7,7 @@ import { ServiceMixin } from "@loopback/service-proxy";
 import path from "path";
 import { MySequence } from "./sequence";
 import { staticAuth } from "./middlewares/auth.middleware";
+import { UserCpuMemRepository } from "./repositories";
 
 export { ApplicationConfig };
 
@@ -27,6 +28,8 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
         this.component(RestExplorerComponent);
 
         this.middleware(staticAuth);
+
+        this.repository(UserCpuMemRepository);
 
         this.projectRoot = __dirname;
         // Customize @loopback/boot Booter Conventions here
