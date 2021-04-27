@@ -27,9 +27,12 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
             path: "/explorer",
         });
         this.component(RestExplorerComponent);
+
+        // authentication
         this.component(AuthenticationComponent);
         registerAuthenticationStrategy(this, StaticAuthenticationStrategy);
 
+        // repository
         this.repository(UserCpuMemRepository);
 
         this.projectRoot = __dirname;
