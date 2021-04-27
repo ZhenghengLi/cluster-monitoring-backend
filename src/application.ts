@@ -30,8 +30,6 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
         this.component(AuthenticationComponent);
         registerAuthenticationStrategy(this, StaticAuthenticationStrategy);
 
-        // this.middleware(staticAuth);
-
         this.repository(UserCpuMemRepository);
 
         this.projectRoot = __dirname;
