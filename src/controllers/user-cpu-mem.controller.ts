@@ -7,6 +7,7 @@ import { repository } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
 
 const schemaNodeUtil: SchemaObject = {
+    title: "NodeUtil",
     type: "object",
     properties: {
         node: { type: "string" },
