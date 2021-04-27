@@ -14,6 +14,7 @@ const schemaNodeUtil: SchemaObject = {
         data: {
             type: "array",
             items: {
+                title: "UserUtil",
                 type: "object",
                 properties: {
                     user: { type: "string" },
