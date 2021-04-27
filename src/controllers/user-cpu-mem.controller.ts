@@ -1,11 +1,12 @@
 // Uncomment these imports to begin using these cool features!
 
 // import {inject} from '@loopback/core';
-import { get, post, requestBody, Request, RestBindings } from "@loopback/rest";
-import { inject } from "@loopback/core";
+import { get, post, requestBody } from "@loopback/rest";
+import { repository } from "@loopback/repository";
+import { UserCpuMemRepository } from "../repositories";
 
 export class UserCpuMemController {
-    constructor(@inject(RestBindings.Http.REQUEST) private req: Request) {}
+    constructor(@repository(UserCpuMemRepository) private userCpuMemRepo: UserCpuMemRepository) {}
     @post("/user-cpu-mem")
     async create(@requestBody.array({}) data: Object[]) {
         console.log(data);
