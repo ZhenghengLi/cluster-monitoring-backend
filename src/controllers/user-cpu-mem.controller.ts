@@ -5,6 +5,7 @@ import { get, post, requestBody, SchemaObject } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
 import { repository } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
+import { UserCpuMem } from "../models";
 
 const schemaNodeUtil: SchemaObject = {
     title: "NodeUtil",
@@ -55,9 +56,25 @@ export class UserCpuMemController {
 
     @authenticate("static")
     @post("/user-cpu-mem")
-    async create(@requestBody.array(schemaNodeUtil) data: NodeUtil[]) {
-        console.log(data);
-        return data;
+    async create(@requestBody.array(schemaNodeUtil) data: NodeUtil[]): Promise<UserCpuMem[]> {
+        const currentTime = new Date().getTime();
+
+        const entries: UserCpuMem[] = [];
+        for (const x of data) {
+            if (x.data.length < 1) continue;
+            const node = x.node;
+            for (const y of x.data) {
+                const entry = new UserCpuMem();
+                entry.time = currentTime;
+                entry.node = node;
+                entry.user = y.user;
+                entry.cpu = y.util.cpu;
+                entry.mem = y.util.mem;
+                entries.push(entry);
+            }
+        }
+
+        return this.userCpuMemRepo.createAll(entries);
     }
 
     @get("/user-cpu-mem")
