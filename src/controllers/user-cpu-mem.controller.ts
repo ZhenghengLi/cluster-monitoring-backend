@@ -2,6 +2,7 @@
 
 // import {inject} from '@loopback/core';
 import { get, post, requestBody, SchemaObject } from "@loopback/rest";
+import { authenticate } from "@loopback/authentication";
 import { repository } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
 
@@ -45,6 +46,8 @@ type NodeUtil = {
 
 export class UserCpuMemController {
     constructor(@repository(UserCpuMemRepository) private userCpuMemRepo: UserCpuMemRepository) {}
+
+    @authenticate("static")
     @post("/user-cpu-mem")
     async create(@requestBody.array(schemaNodeUtil) data: NodeUtil[]) {
         console.log(data);

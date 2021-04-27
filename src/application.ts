@@ -6,7 +6,8 @@ import { RestExplorerBindings, RestExplorerComponent } from "@loopback/rest-expl
 import { ServiceMixin } from "@loopback/service-proxy";
 import path from "path";
 import { MySequence } from "./sequence";
-import { staticAuth } from "./middlewares/auth.middleware";
+import { AuthenticationComponent, registerAuthenticationStrategy } from "@loopback/authentication";
+import { StaticAuthenticationStrategy } from "./authentication";
 import { UserCpuMemRepository } from "./repositories";
 
 export { ApplicationConfig };
@@ -26,8 +27,10 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
             path: "/explorer",
         });
         this.component(RestExplorerComponent);
+        this.component(AuthenticationComponent);
+        registerAuthenticationStrategy(this, StaticAuthenticationStrategy);
 
-        this.middleware(staticAuth);
+        // this.middleware(staticAuth);
 
         this.repository(UserCpuMemRepository);
 
