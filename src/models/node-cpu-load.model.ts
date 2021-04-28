@@ -14,6 +14,15 @@ export class NodeCpuLoad extends Entity {
     id?: number;
 
     @property({
+        type: "number",
+        required: true,
+        postgresql: {
+            dataType: "bigint",
+        },
+    })
+    time: number; // unix timestamp in millisecond
+
+    @property({
         type: "string",
         required: true,
         postgresql: {
