@@ -1,6 +1,3 @@
-// Uncomment these imports to begin using these cool features!
-
-// import {inject} from '@loopback/core';
 import { get, post, param, requestBody, SchemaObject } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
 import { repository, Filter } from "@loopback/repository";
@@ -77,6 +74,7 @@ export class UserCpuMemController {
         return this.userCpuMemRepo.createAll(entries);
     }
 
+    @authenticate("static")
     @get("/user-cpu-mem")
     async find(@param.filter(UserCpuMem) filter?: Filter<UserCpuMem>): Promise<UserCpuMem[]> {
         return this.userCpuMemRepo.find(filter);
