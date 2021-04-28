@@ -1,9 +1,9 @@
 // Uncomment these imports to begin using these cool features!
 
 // import {inject} from '@loopback/core';
-import { get, post, requestBody, SchemaObject } from "@loopback/rest";
+import { get, post, param, requestBody, SchemaObject } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
-import { repository } from "@loopback/repository";
+import { repository, Filter } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
 import { UserCpuMem } from "../models";
 
@@ -78,7 +78,7 @@ export class UserCpuMemController {
     }
 
     @get("/user-cpu-mem")
-    async find() {
-        return "none";
+    async find(@param.filter(UserCpuMem) filter?: Filter<UserCpuMem>): Promise<UserCpuMem[]> {
+        return this.userCpuMemRepo.find(filter);
     }
 }
