@@ -6,8 +6,8 @@ const config = {
     connector: "postgresql",
     host: process.env.POSTGRESQL_HOST ?? "/var/run/postgresql",
     port: process.env.POSTGRESQL_PORT ?? 5432,
-    user: process.env.POSTGRESQL_USER ?? "testuser",
-    password: process.env.POSTGRESQL_PASSWORD ?? "testpassword",
+    user: process.env.POSTGRESQL_USER ?? "cluster_monitoring",
+    password: process.env.POSTGRESQL_PASSWORD,
     database: process.env.POSTGRESQL_DATABASE ?? "cluster_monitoring",
 };
 
