@@ -5,14 +5,14 @@ import { UserCpuMemRepository } from "../repositories";
 import { UserCpuMem } from "../models";
 
 const schemaNodeUtil: SchemaObject = {
-    title: "NodeUtil",
+    title: "UserCpuMemData",
     type: "object",
     properties: {
         node: { type: "string" },
         data: {
             type: "array",
             items: {
-                title: "UserUtil",
+                title: "UserCpuMemOne",
                 type: "object",
                 properties: {
                     user: { type: "string" },
@@ -35,7 +35,7 @@ const schemaNodeUtil: SchemaObject = {
     additionalProperties: false,
 };
 
-type UserUtil = {
+type UserCpuMemOne = {
     user: string;
     util: {
         cpu: number;
@@ -43,9 +43,9 @@ type UserUtil = {
     };
 };
 
-type NodeUtil = {
+type UserCpuMemData = {
     node: string;
-    data: UserUtil[];
+    data: UserCpuMemOne[];
 };
 
 export class UserCpuMemController {
@@ -53,7 +53,7 @@ export class UserCpuMemController {
 
     @authenticate("static")
     @post("/user-cpu-mem")
-    async create(@requestBody.array(schemaNodeUtil) data: NodeUtil[]): Promise<UserCpuMem[]> {
+    async create(@requestBody.array(schemaNodeUtil) data: UserCpuMemData[]): Promise<UserCpuMem[]> {
         const currentTime = new Date().getTime();
 
         const entries: UserCpuMem[] = [];

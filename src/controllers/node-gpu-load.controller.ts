@@ -12,7 +12,7 @@ const schemaGpuLoad: SchemaObject = {
         data: {
             type: "array",
             items: {
-                title: "NodeGpuLoadCard",
+                title: "NodeGpuLoadOne",
                 type: "object",
                 properties: {
                     busid: { type: "string" },
@@ -35,7 +35,7 @@ const schemaGpuLoad: SchemaObject = {
     additionalProperties: false,
 };
 
-type NodeGpuLoadCard = {
+type NodeGpuLoadOne = {
     busid: string;
     util: {
         gpu: number;
@@ -45,7 +45,7 @@ type NodeGpuLoadCard = {
 
 type NodeGpuLoadData = {
     node: string;
-    data: NodeGpuLoadCard[];
+    data: NodeGpuLoadOne[];
 };
 
 export class NodeGpuLoadController {
