@@ -65,8 +65,7 @@ export class UserCpuMemController {
                 entry.time = currentTime;
                 entry.node = node;
                 entry.user = y.user;
-                entry.cpu = y.util.cpu;
-                entry.mem = y.util.mem;
+                Object.assign(entry, y.util);
                 entries.push(entry);
             }
         }

@@ -55,14 +55,7 @@ export class NodeCpuLoadControllerController {
             const entry = new NodeCpuLoad();
             entry.time = currentTime;
             entry.node = x.node;
-            entry.user = x.data.user;
-            entry.system = x.data.system;
-            entry.idle = x.data.idle;
-            entry.iowait = x.data.iowait;
-            entry.irq = x.data.irq;
-            entry.softirq = x.data.softirq;
-            entry.steal = x.data.steal;
-            entry.guest = x.data.guest;
+            Object.assign(entry, x.data);
             entries.push(entry);
         }
         return this.nodeCpuLoadRepo.createAll(entries);
