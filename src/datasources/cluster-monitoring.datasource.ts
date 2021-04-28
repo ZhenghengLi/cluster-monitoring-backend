@@ -4,12 +4,11 @@ import { juggler } from "@loopback/repository";
 const config = {
     name: "cluster_monitoring",
     connector: "postgresql",
-    url: "postgres://testuser:testpassword@localhost:5432/cluster_monitoring",
-    host: "localhost",
-    port: 5432,
-    user: "testuser",
-    password: "testpassword",
-    database: "cluster_monitoring",
+    host: process.env.POSTGRESQL_HOST ?? "/var/run/postgresql",
+    port: process.env.POSTGRESQL_PORT ?? 5432,
+    user: process.env.POSTGRESQL_USER ?? "testuser",
+    password: process.env.POSTGRESQL_PASSWORD ?? "testpassword",
+    database: process.env.POSTGRESQL_DATABASE ?? "cluster_monitoring",
 };
 
 // Observe application's life cycle to disconnect the datasource when
