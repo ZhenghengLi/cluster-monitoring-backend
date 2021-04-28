@@ -4,7 +4,7 @@ import { repository, Filter } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
 import { UserCpuMem } from "../models";
 
-const schemaNodeUtil: SchemaObject = {
+const schemaUserUtil: SchemaObject = {
     title: "UserCpuMemData",
     type: "object",
     properties: {
@@ -53,7 +53,7 @@ export class UserCpuMemController {
 
     @authenticate("static")
     @post("/user-cpu-mem")
-    async create(@requestBody.array(schemaNodeUtil) data: UserCpuMemData[]): Promise<UserCpuMem[]> {
+    async create(@requestBody.array(schemaUserUtil) data: UserCpuMemData[]): Promise<UserCpuMem[]> {
         const currentTime = new Date().getTime();
 
         const entries: UserCpuMem[] = [];
