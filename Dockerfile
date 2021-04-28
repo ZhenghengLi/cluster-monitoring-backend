@@ -23,6 +23,8 @@ RUN set -x \
     && cd / \
     && rm $INSTALL_DIR/package*.json
 
+ENV HOST="0.0.0.0" PORT="3000"
+
 USER node
 
 CMD ["/bin/bash"]
