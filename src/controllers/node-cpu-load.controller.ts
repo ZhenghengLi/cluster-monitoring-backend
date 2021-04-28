@@ -43,7 +43,7 @@ type NodeCpuLoadData = {
     };
 };
 
-export class NodeCpuLoadControllerController {
+export class NodeCpuLoadController {
     constructor(@repository(NodeCpuLoadRepository) private nodeCpuLoadRepo: NodeCpuLoadRepository) {}
 
     @authenticate("static")
@@ -64,6 +64,6 @@ export class NodeCpuLoadControllerController {
     @authenticate("static")
     @get("/node-cpu-load")
     async find(@param.filter(NodeCpuLoad) filter?: Filter<NodeCpuLoad>): Promise<NodeCpuLoad[]> {
-        return [];
+        return this.nodeCpuLoadRepo.find(filter);
     }
 }

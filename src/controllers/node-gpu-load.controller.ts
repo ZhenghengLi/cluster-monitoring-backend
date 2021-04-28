@@ -6,7 +6,7 @@ import { NodeGpuLoad } from "../models";
 
 const schemaGpuLoad: SchemaObject = {};
 
-export class NodeGpuLoadControllerController {
+export class NodeGpuLoadController {
     constructor(@repository(NodeGpuLoadRepository) private nodeGpuLoadRepo: NodeGpuLoadRepository) {}
 
     @authenticate("static")
