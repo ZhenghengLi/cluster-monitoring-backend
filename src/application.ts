@@ -1,5 +1,5 @@
 import { BootMixin } from "@loopback/boot";
-import { ApplicationConfig } from "@loopback/core";
+import { ApplicationConfig, createBindingFromClass } from "@loopback/core";
 import { RepositoryMixin } from "@loopback/repository";
 import { RestApplication } from "@loopback/rest";
 import { RestExplorerBindings, RestExplorerComponent } from "@loopback/rest-explorer";
@@ -9,6 +9,7 @@ import { MySequence } from "./sequence";
 import { AuthenticationComponent, registerAuthenticationStrategy } from "@loopback/authentication";
 import { StaticAuthenticationStrategy } from "./authentication";
 import { UserCpuMemRepository } from "./repositories";
+import { SecuritySpecEnhancer } from "./security";
 
 export { ApplicationConfig };
 
@@ -34,6 +35,9 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
 
         // repository
         this.repository(UserCpuMemRepository);
+
+        // secrity
+        this.add(createBindingFromClass(SecuritySpecEnhancer));
 
         this.projectRoot = __dirname;
         // Customize @loopback/boot Booter Conventions here
