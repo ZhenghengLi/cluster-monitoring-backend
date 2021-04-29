@@ -48,10 +48,10 @@ type NodeGpuLoadData = {
     data: NodeGpuLoadOne[];
 };
 
+@authenticate("static")
 export class NodeGpuLoadController {
     constructor(@repository(NodeGpuLoadRepository) private nodeGpuLoadRepo: NodeGpuLoadRepository) {}
 
-    @authenticate("static")
     @post("/node-gpu-load")
     @response(200, {
         description: "Array of NodeGpuLoad model instances",
@@ -84,7 +84,6 @@ export class NodeGpuLoadController {
         return this.nodeGpuLoadRepo.createAll(entries);
     }
 
-    @authenticate("static")
     @get("/node-gpu-load")
     @response(200, {
         description: "Array of NodeGpuLoad model instances",
