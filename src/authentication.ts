@@ -8,7 +8,17 @@ export class StaticAuthenticationStrategy implements AuthenticationStrategy {
     name = "static";
     async authenticate(request: Request): Promise<UserProfile | undefined> {
         const auth = request.header("authorization");
-        if (auth === passWord) {
+        if (!auth) throw new HttpErrors.Unauthorized();
+
+        const authArr = auth.split(/\s+/);
+        let token = "";
+        if (authArr.length > 1) {
+            token = authArr[1];
+        } else {
+            token = authArr[0];
+        }
+
+        if (token === passWord) {
             return { [securityId]: "ok" };
         } else {
             throw new HttpErrors.Unauthorized();

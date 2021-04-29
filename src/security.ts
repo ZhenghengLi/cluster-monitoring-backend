@@ -8,14 +8,13 @@ export class SecuritySpecEnhancer implements OASEnhancer {
         const securityPatchSpec: Partial<OpenAPIObject> = {
             components: {
                 securitySchemes: {
-                    jwt: {
+                    bearer: {
                         type: "http",
                         scheme: "bearer",
-                        bearerFormat: "JWT",
                     },
                 },
             },
-            security: [{ jwt: [] }],
+            security: [{ bearer: [] }],
         };
         return mergeOpenAPISpec(spec, securityPatchSpec);
     }
