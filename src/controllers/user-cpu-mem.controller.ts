@@ -48,10 +48,10 @@ type UserCpuMemData = {
     data: UserCpuMemOne[];
 };
 
-@authenticate("static")
 export class UserCpuMemController {
     constructor(@repository(UserCpuMemRepository) private userCpuMemRepo: UserCpuMemRepository) {}
 
+    @authenticate("static")
     @post("/user-cpu-mem")
     @response(200, {
         description: "Array of UserCpuMem model instances",

@@ -43,10 +43,10 @@ type NodeCpuLoadData = {
     };
 };
 
-@authenticate("static")
 export class NodeCpuLoadController {
     constructor(@repository(NodeCpuLoadRepository) private nodeCpuLoadRepo: NodeCpuLoadRepository) {}
 
+    @authenticate("static")
     @post("/node-cpu-load")
     @response(200, {
         description: "Array of NodeCpuLoad model instances",
