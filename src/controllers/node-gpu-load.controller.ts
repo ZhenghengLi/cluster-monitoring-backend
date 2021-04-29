@@ -1,4 +1,4 @@
-import { get, post, param, requestBody, SchemaObject } from "@loopback/rest";
+import { get, post, param, requestBody, SchemaObject, response, getModelSchemaRef } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
 import { repository, Filter } from "@loopback/repository";
 import { NodeGpuLoadRepository } from "../repositories";
@@ -53,6 +53,17 @@ export class NodeGpuLoadController {
 
     @authenticate("static")
     @post("/node-gpu-load")
+    @response(200, {
+        description: "Array of NodeGpuLoad model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(NodeGpuLoad),
+                },
+            },
+        },
+    })
     async create(@requestBody.array(schemaGpuLoad) data: NodeGpuLoadData[]): Promise<NodeGpuLoad[]> {
         const currentTime = new Date().getTime();
 
@@ -75,6 +86,17 @@ export class NodeGpuLoadController {
 
     @authenticate("static")
     @get("/node-gpu-load")
+    @response(200, {
+        description: "Array of NodeGpuLoad model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(NodeGpuLoad, { includeRelations: true }),
+                },
+            },
+        },
+    })
     async find(@param.filter(NodeGpuLoad) filter?: Filter<NodeGpuLoad>): Promise<NodeGpuLoad[]> {
         return this.nodeGpuLoadRepo.find(filter);
     }

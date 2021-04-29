@@ -1,4 +1,4 @@
-import { get, post, param, requestBody, SchemaObject } from "@loopback/rest";
+import { get, post, param, requestBody, SchemaObject, response, getModelSchemaRef } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
 import { repository, Filter } from "@loopback/repository";
 import { NodeCpuLoadRepository } from "../repositories";
@@ -48,6 +48,17 @@ export class NodeCpuLoadController {
 
     @authenticate("static")
     @post("/node-cpu-load")
+    @response(200, {
+        description: "Array of NodeCpuLoad model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(NodeCpuLoad),
+                },
+            },
+        },
+    })
     async create(@requestBody.array(schemaCpuLoad) data: NodeCpuLoadData[]): Promise<NodeCpuLoad[]> {
         const currentTime = new Date().getTime();
         const entries: NodeCpuLoad[] = [];
@@ -63,6 +74,17 @@ export class NodeCpuLoadController {
 
     @authenticate("static")
     @get("/node-cpu-load")
+    @response(200, {
+        description: "Array of NodeCpuLoad model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(NodeCpuLoad, { includeRelations: true }),
+                },
+            },
+        },
+    })
     async find(@param.filter(NodeCpuLoad) filter?: Filter<NodeCpuLoad>): Promise<NodeCpuLoad[]> {
         return this.nodeCpuLoadRepo.find(filter);
     }

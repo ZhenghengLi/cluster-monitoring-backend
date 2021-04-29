@@ -1,4 +1,4 @@
-import { get, post, param, requestBody, SchemaObject } from "@loopback/rest";
+import { get, post, param, requestBody, SchemaObject, response, getModelSchemaRef } from "@loopback/rest";
 import { authenticate } from "@loopback/authentication";
 import { repository, Filter } from "@loopback/repository";
 import { UserCpuMemRepository } from "../repositories";
@@ -53,6 +53,17 @@ export class UserCpuMemController {
 
     @authenticate("static")
     @post("/user-cpu-mem")
+    @response(200, {
+        description: "Array of UserCpuMem model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(UserCpuMem),
+                },
+            },
+        },
+    })
     async create(@requestBody.array(schemaUserUtil) data: UserCpuMemData[]): Promise<UserCpuMem[]> {
         const currentTime = new Date().getTime();
 
@@ -75,6 +86,17 @@ export class UserCpuMemController {
 
     @authenticate("static")
     @get("/user-cpu-mem")
+    @response(200, {
+        description: "Array of UserCpuMem model instances",
+        content: {
+            "application/json": {
+                schema: {
+                    type: "array",
+                    items: getModelSchemaRef(UserCpuMem, { includeRelations: true }),
+                },
+            },
+        },
+    })
     async find(@param.filter(UserCpuMem) filter?: Filter<UserCpuMem>): Promise<UserCpuMem[]> {
         return this.userCpuMemRepo.find(filter);
     }
