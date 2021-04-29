@@ -52,14 +52,18 @@ export class NodeGpuLoadController {
     constructor(@repository(NodeGpuLoadRepository) private nodeGpuLoadRepo: NodeGpuLoadRepository) {}
 
     @authenticate("static")
-    @post("/node-gpu-load")
-    @response(200, {
-        description: "Array of NodeGpuLoad model instances",
-        content: {
-            "application/json": {
-                schema: {
-                    type: "array",
-                    items: getModelSchemaRef(NodeGpuLoad),
+    @post("/node-gpu-load", {
+        security: [{ password: [] }],
+        responses: {
+            "200": {
+                description: "Array of NodeGpuLoad model instances",
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "array",
+                            items: getModelSchemaRef(NodeGpuLoad),
+                        },
+                    },
                 },
             },
         },

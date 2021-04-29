@@ -14,7 +14,6 @@ export class SecuritySpecEnhancer implements OASEnhancer {
                     },
                 },
             },
-            security: [{ password: [] }],
         };
         return mergeOpenAPISpec(spec, securityPatchSpec);
     }

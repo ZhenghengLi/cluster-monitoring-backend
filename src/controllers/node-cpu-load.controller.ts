@@ -47,14 +47,18 @@ export class NodeCpuLoadController {
     constructor(@repository(NodeCpuLoadRepository) private nodeCpuLoadRepo: NodeCpuLoadRepository) {}
 
     @authenticate("static")
-    @post("/node-cpu-load")
-    @response(200, {
-        description: "Array of NodeCpuLoad model instances",
-        content: {
-            "application/json": {
-                schema: {
-                    type: "array",
-                    items: getModelSchemaRef(NodeCpuLoad),
+    @post("/node-cpu-load", {
+        security: [{ password: [] }],
+        responses: {
+            "200": {
+                description: "Array of NodeCpuLoad model instances",
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "array",
+                            items: getModelSchemaRef(NodeCpuLoad),
+                        },
+                    },
                 },
             },
         },

@@ -52,14 +52,18 @@ export class UserCpuMemController {
     constructor(@repository(UserCpuMemRepository) private userCpuMemRepo: UserCpuMemRepository) {}
 
     @authenticate("static")
-    @post("/user-cpu-mem")
-    @response(200, {
-        description: "Array of UserCpuMem model instances",
-        content: {
-            "application/json": {
-                schema: {
-                    type: "array",
-                    items: getModelSchemaRef(UserCpuMem),
+    @post("/user-cpu-mem", {
+        security: [{ password: [] }],
+        responses: {
+            "200": {
+                description: "Array of UserCpuMem model instances",
+                content: {
+                    "application/json": {
+                        schema: {
+                            type: "array",
+                            items: getModelSchemaRef(UserCpuMem),
+                        },
+                    },
                 },
             },
         },
