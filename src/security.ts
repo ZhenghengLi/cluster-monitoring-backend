@@ -8,13 +8,13 @@ export class SecuritySpecEnhancer implements OASEnhancer {
         const securityPatchSpec: Partial<OpenAPIObject> = {
             components: {
                 securitySchemes: {
-                    bearer: {
+                    password: {
                         type: "http",
                         scheme: "bearer",
                     },
                 },
             },
-            security: [{ bearer: [] }],
+            security: [{ password: [] }],
         };
         return mergeOpenAPISpec(spec, securityPatchSpec);
     }
