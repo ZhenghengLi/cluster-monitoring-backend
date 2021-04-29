@@ -15,6 +15,7 @@ FROM node:14-slim
 # copy from builder
 ARG INSTALL_DIR=/opt/cluster-monitoring-backend
 COPY --from=builder $INSTALL_DIR/dist $INSTALL_DIR/dist
+COPY --from=builder $INSTALL_DIR/public $INSTALL_DIR/public
 COPY --from=builder $INSTALL_DIR/package*.json $INSTALL_DIR/
 
 RUN set -x \
