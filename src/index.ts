@@ -22,7 +22,8 @@ if (require.main === module) {
             host: process.env.HOST,
             gracePeriodForClose: 5000, // 5 seconds
             openApiSpec: {
-                servers: [{ url: process.env.API_SERVER_URL }],
+                servers: process.env.API_SERVER_URL ? [{ url: process.env.API_SERVER_URL }] : undefined,
+                setServersFromRequest: !process.env.API_SERVER_URL,
             },
             basePath: process.env.API_SERVER_BASE_PATH,
         },
