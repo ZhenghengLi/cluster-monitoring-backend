@@ -97,6 +97,10 @@ export class UserCpuMemController {
         },
     })
     async find(@param.filter(UserCpuMem) filter?: Filter<UserCpuMem>): Promise<UserCpuMem[]> {
-        return this.userCpuMemRepo.find(filter);
+        if (filter) {
+            return this.userCpuMemRepo.find(filter);
+        } else {
+            return [];
+        }
     }
 }

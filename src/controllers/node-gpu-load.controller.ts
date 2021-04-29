@@ -97,6 +97,10 @@ export class NodeGpuLoadController {
         },
     })
     async find(@param.filter(NodeGpuLoad) filter?: Filter<NodeGpuLoad>): Promise<NodeGpuLoad[]> {
-        return this.nodeGpuLoadRepo.find(filter);
+        if (filter) {
+            return this.nodeGpuLoadRepo.find(filter);
+        } else {
+            return [];
+        }
     }
 }

@@ -85,6 +85,10 @@ export class NodeCpuLoadController {
         },
     })
     async find(@param.filter(NodeCpuLoad) filter?: Filter<NodeCpuLoad>): Promise<NodeCpuLoad[]> {
-        return this.nodeCpuLoadRepo.find(filter);
+        if (filter) {
+            return this.nodeCpuLoadRepo.find(filter);
+        } else {
+            return [];
+        }
     }
 }

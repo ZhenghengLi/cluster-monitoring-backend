@@ -1,6 +1,6 @@
 {
   "name": "cluster-monitoring-backend",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "cluster monitoring backend",
   "keywords": [
     "loopback-application",
