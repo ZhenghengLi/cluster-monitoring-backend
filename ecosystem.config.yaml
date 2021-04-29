@@ -1,12 +1,12 @@
 apps:
-  - name: cluster-monitoring-backend
-    script: dist/index.js
+  - name: 'cluster-monitoring-backend'
+    script: 'dist/index.js'
     instances: 1,
     autorestart: true
     env:
-      NODE_ENV: production
-      HOST: localhost
+      NODE_ENV: 'production'
+      HOST: 'localhost'
       PORT: 3000
-      PASSWORD: xxxx
-      API_SERVER_URL: http://localhost:3000/api
-      API_SERVER_BASE_PATH: /api
+      PASSWORD: 'xxxx'
+      API_SERVER_URL: 'http://localhost:3000/api'
+      API_SERVER_BASE_PATH: '/api'
