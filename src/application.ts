@@ -8,7 +8,7 @@ import path from "path";
 import { MySequence } from "./sequence";
 import { AuthenticationComponent, registerAuthenticationStrategy } from "@loopback/authentication";
 import { StaticAuthenticationStrategy } from "./authentication";
-import { UserCpuMemRepository } from "./repositories";
+import { UserCpuMemRepository, NodeCpuLoadRepository, NodeGpuLoadRepository } from "./repositories";
 import { SecuritySpecEnhancer } from "./security";
 
 export { ApplicationConfig };
@@ -33,11 +33,13 @@ export class ClusterMonitoringApplication extends BootMixin(ServiceMixin(Reposit
         this.component(AuthenticationComponent);
         registerAuthenticationStrategy(this, StaticAuthenticationStrategy);
 
-        // repository
-        this.repository(UserCpuMemRepository);
-
         // secrity
         this.add(createBindingFromClass(SecuritySpecEnhancer));
+
+        // repository
+        this.repository(UserCpuMemRepository);
+        this.repository(NodeCpuLoadRepository);
+        this.repository(NodeGpuLoadRepository);
 
         this.projectRoot = __dirname;
         // Customize @loopback/boot Booter Conventions here
