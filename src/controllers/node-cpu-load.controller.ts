@@ -20,8 +20,9 @@ const schemaCpuLoad: SchemaObject = {
                 softirq: { type: "number" },
                 steal: { type: "number" },
                 guest: { type: "number" },
+                memory: { type: "number" },
             },
-            required: ["user", "system", "idle", "iowait", "irq", "softirq", "steal", "guest"],
+            required: ["user", "system", "idle", "iowait", "irq", "softirq", "steal", "guest", "memory"],
             additionalProperties: false,
         },
     },
@@ -40,6 +41,7 @@ type NodeCpuLoadData = {
         softirq: number;
         steal: number;
         guest: number;
+        memory: number;
     };
 };
 

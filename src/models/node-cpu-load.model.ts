@@ -103,6 +103,15 @@ export class NodeCpuLoad extends Entity {
     })
     guest: number;
 
+    @property({
+        type: "number",
+        required: true,
+        postgresql: {
+            dataType: "real",
+        },
+    })
+    memory: number;
+
     constructor(data?: Partial<NodeCpuLoad>) {
         super(data);
     }
